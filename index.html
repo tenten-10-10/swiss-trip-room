@@ -137,20 +137,80 @@
       #map{ height:440px; border-radius:12px; border:1px solid var(--line); box-shadow:var(--shadow); z-index:0; }
       .map-note{ font-size:13.5px; color:var(--muted); margin-top:8px; }
       footer{ margin-top:48px; color:var(--muted); font-size:13px; border-top:1px solid var(--line); padding-top:14px; }
+      /* セクションナビ（固定） */
+      section{ scroll-margin-top:64px; }
+      h2{ scroll-margin-top:64px; }
+      .section-nav{ position:sticky; top:0; z-index:40; display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; background:var(--bg); padding:10px 2px 10px; margin:14px -2px 0; border-bottom:1px solid var(--line); }
+      .section-nav::-webkit-scrollbar{ display:none; }
+      .section-nav a{ flex:none; display:inline-flex; align-items:center; min-height:2.25rem; padding:6px 14px; border-radius:999px; background:var(--surface); border:1px solid var(--line); color:var(--ink); text-decoration:none; font-size:14px; font-weight:700; box-shadow:var(--shadow); white-space:nowrap; }
+      .section-nav a.accent{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+      /* 詳細トグル（スマホ用・PCでは非表示） */
+      .detail-toggle{ display:none; }
+      /* トップへ戻る */
+      .back-to-top{ position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom)); z-index:50; display:inline-flex; align-items:center; gap:6px; background:var(--accent); color:var(--accent-ink); border:none; font:inherit; font-weight:800; font-size:14px; border-radius:999px; padding:11px 16px; box-shadow:0 6px 20px rgba(0,0,0,.22); cursor:pointer; }
       @media (max-width:640px){
-        .vs{ grid-template-columns:1fr; }
-        .card img{ height:150px; }
-        .table-scroll{ overflow-x:visible; }
-        table{ min-width:0; }
-        table thead{ display:none; }
-        table, tbody, tr, th, td{ display:block; width:100%; }
-        tr{ padding:10px 12px; border-bottom:1px solid var(--line); }
-        tr:last-child{ border-bottom:none; }
-        th,td{ border-bottom:none; padding:2px 0; }
-        td.num{ text-align:left; }
-        td::before{ content:attr(data-l); color:var(--muted); font-size:12.5px; display:block; }
-        tbody th::before{ content:none; }
+        .wrap{ padding:12px 12px 84px; }
+        h1{ font-size:24px; margin:2px 0 6px; }
+        h2{ font-size:19px; }
+        h3{ font-size:16px; }
+        .lead{ font-size:14px; line-height:1.6; }
+        section{ margin-top:22px; scroll-margin-top:58px; }
+        h2{ scroll-margin-top:58px; }
+        .sec-head{ margin-bottom:6px; gap:8px; }
+        .sec-num{ width:26px; height:26px; font-size:13px; }
+        .sec-sub{ font-size:13.5px; margin-bottom:10px; line-height:1.55; }
+        .meta-row{ gap:6px; margin:10px 0 2px; display:grid; grid-template-columns:1fr 1fr; }
+        .meta{ padding:7px 10px; font-size:13px; border-radius:8px; line-height:1.45; }
+        .meta b{ font-size:11px; }
+        .section-nav{ top:0; padding:8px 2px; margin-top:10px; gap:6px; }
+        .section-nav a{ font-size:13.5px; padding:5px 12px; }
+        .cond-grid{ gap:8px; }
+        .cond{ padding:10px 12px; border-radius:10px; }
+        .cond li{ font-size:13.5px; padding-top:2px; padding-bottom:2px; }
+        .cards{ grid-template-columns:1fr; gap:12px; }
+        .card{ border-radius:12px; }
+        .card .photos{ grid-template-columns:1fr 1fr; }
+        .card img{ height:96px; }
+        .card .photos.single img{ height:110px !important; }
+        .card .body{ padding:10px 12px 12px; gap:6px; }
+        .price{ font-size:19px; }
+        .price-alt{ font-size:12.5px; }
+        .specs{ font-size:13px; gap:2px 10px; }
+        .specs div{ padding:2px 0; }
+        .note{ font-size:13px; line-height:1.55; }
+        .equip{ font-size:12.5px; gap:3px 8px; padding-top:8px; }
+        .equip .sym{ width:20px; height:20px; font-size:12px; }
+        .equip-legend{ font-size:12.5px; margin-bottom:10px; gap:4px 12px; }
+        .photo-links a{ font-size:13px; padding:6px 10px; }
+        a.btn{ padding:9px 12px; font-size:14px; }
+        /* 詳細折りたたみ */
+        .detail-toggle{ display:inline-flex; align-items:center; justify-content:center; gap:6px; width:100%; background:var(--surface2); color:var(--accent); border:1px solid var(--line); font:inherit; font-weight:700; font-size:13.5px; border-radius:8px; padding:8px 10px; cursor:pointer; min-height:2.25rem; }
+        .card.is-collapsed .specs,
+        .card.is-collapsed .equip,
+        .card.is-collapsed .note,
+        .card.is-collapsed .photo-links,
+        .card.is-collapsed .price-alt{ display:none; }
+        /* 比較表：横スクロール＋行を詰める */
+        .table-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:10px; }
+        table{ min-width:580px; font-size:13px; }
+        th,td{ padding:6px 8px; line-height:1.4; }
+        thead th{ font-size:12px; }
+        .vs{ grid-template-columns:1fr; gap:10px; }
+        .vs .col{ padding:12px 14px; }
+        .vs li{ font-size:13.5px; margin:3px 0; }
+        .verdict{ padding:11px 14px; font-size:14px; margin-top:10px; }
+        .steps{ gap:8px; }
+        .step{ padding:10px 12px; }
+        .step p{ font-size:13.5px; }
+        .none-box{ padding:11px 14px; font-size:13.5px; }
+        #map{ height:300px; border-radius:10px; }
+        .map-note{ font-size:12.5px; }
+        .board{ padding:12px 14px; }
+        .msg{ padding:8px 11px; }
+        .msg-body{ font-size:14px; }
+        footer{ margin-top:28px; }
       }
+
     </style>
   </head>
   <body>
@@ -167,6 +227,17 @@
           <div class="meta"><b>予約状況</b>未予約</div>
         </div>
       </header>
+
+      <nav class="section-nav" aria-label="セクションへ移動">
+        <a href="#s2" class="accent">候補8件</a>
+        <a href="#s1">条件</a>
+        <a href="#s4">比較表</a>
+        <a href="#s5">立地比較</a>
+        <a href="#s6">マップ</a>
+        <a href="#s3">写真ポイント</a>
+        <a href="#s8">次に決める</a>
+        <a href="#s9">掲示板</a>
+      </nav>
 
       <section aria-labelledby="s1">
         <div class="sec-head"><span class="sec-num">1</span><h2 id="s1">泊まり方と条件</h2></div>
@@ -199,7 +270,7 @@
 
       <section aria-labelledby="s2">
         <div class="sec-head"><span class="sec-num">2</span><h2 id="s2">候補一覧（8件）</h2></div>
-        <p class="sec-sub">価格はすべて5泊・2名・税込の検索表示価格です。写真は各掲載ページの実物写真（部屋／バスルーム）。Airbnbの2件は各カードの「写真を見る」リンクから、部屋とバスルームの写真を直接開けます。各カード下部の設備アイコンで「何があって何がないか」が一目で分かります。</p>
+        <p class="sec-sub">価格はすべて5泊・2名・税込の検索表示価格です。写真は各掲載ページの実物写真（部屋／バスルーム）。Airbnbの2件は各カードの「写真を見る」リンクから、部屋とバスルームの写真を直接開けます。各カード下部の設備アイコンで「何があって何がないか」が一目で分かります。スマホでは各カードはコンパクト表示で、「詳細を見る」をタップすると広さ・設備などが開きます。</p>
         <p class="equip-legend"><span><span class="sym yes">○</span> あり</span><span><span class="sym no">×</span> なし</span><span><span class="sym maybe">△</span> 条件つき・要確認</span><span><span class="sym unk">—</span> 不明</span></p>
         <div class="cards">
 
@@ -561,6 +632,7 @@
         価格は検索時点の表示価格（5泊・2名・税込）で、予約時に変わることがあります。全物件とも未予約です。このページは2人で候補を見比べるための共有ルームです。
       </footer>
     </div>
+    <button type="button" class="back-to-top" id="back-to-top" aria-label="トップへ戻る">↑ トップへ</button>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
       (function () {
@@ -707,6 +779,36 @@
         });
 
         load();
+      })();
+    </script>
+    <script>
+      (function () {
+        // 物件カード：スマホでは詳細を折りたたんで初期表示を短くする
+        var isSmall = window.matchMedia("(max-width: 640px)");
+        document.querySelectorAll(".card .body").forEach(function (body) {
+          var specs = body.querySelector(".specs");
+          if (!specs) return;
+          var card = body.closest(".card");
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "detail-toggle";
+          btn.textContent = "詳細を見る ▾";
+          btn.setAttribute("aria-expanded", "false");
+          body.insertBefore(btn, specs);
+          if (isSmall.matches) card.classList.add("is-collapsed");
+          btn.addEventListener("click", function () {
+            var collapsed = card.classList.toggle("is-collapsed");
+            btn.textContent = collapsed ? "詳細を見る ▾" : "詳細を閉じる ▴";
+            btn.setAttribute("aria-expanded", String(!collapsed));
+          });
+        });
+        // トップへ戻るボタン（常時固定表示）
+        var topBtn = document.getElementById("back-to-top");
+        if (topBtn) {
+          topBtn.addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+        }
       })();
     </script>
   </body>
