@@ -111,6 +111,37 @@ background:var(--surface); border:1px solid var(--line); color:var(--ink); curso
 .shop p{ font-size:14px; color:var(--muted); margin:0;}
 .shop .sun{ color:var(--warn); font-weight:700;}
 .shop a.map-link{ margin-top:8px; font-size:13.5px; font-weight:700; color:var(--accent); text-decoration:none; display:inline-flex; align-items:center; min-height:2rem;}
+/* クリスマス期間メモ */
+.xmas-lead{ background:var(--warn-bg); border-radius:12px; padding:12px 14px; font-size:14.5px; margin-bottom:12px;}
+.xmas-lead b{ color:var(--warn);}
+.xmas-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px;}
+.xday{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px 16px; box-shadow:var(--shadow);}
+.xday.holiday{ border-color:var(--warn); border-width:1.5px;}
+.xday-head{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px;}
+.xday-head h3{ font-size:17px; margin:0;}
+.badge{ flex:none; font-size:11.5px; font-weight:800; padding:3px 9px; border-radius:999px; background:var(--surface2); color:var(--muted);}
+.badge.normal{ background:#e6f2ec; color:var(--accent);}
+.badge.eve{ background:#fff0d6; color:var(--warn);}
+.badge.holiday{ background:#fde8e0; color:#8a3b12;}
+.badge.sunday{ background:var(--surface2); color:var(--muted);}
+.xcols{ display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+.xcols h4{ font-size:12.5px; margin:0 0 4px; letter-spacing:.02em;}
+.xcols .ok h4{ color:var(--accent);}
+.xcols .ng h4{ color:var(--warn);}
+.xcols ul{ margin:0; padding-left:1.15em; font-size:13.5px; line-height:1.55;}
+.xcols li{ margin-bottom:2px;}
+.x-tips{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:10px; margin-top:12px;}
+.x-tip{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:14px; box-shadow:var(--shadow);}
+.x-tip b{ color:var(--accent); display:block; font-size:13px; margin-bottom:2px;}
+.x-tip p{ margin:0;}
+.sources{ margin-top:14px; font-size:12.5px; color:var(--muted); line-height:1.7;}
+.sources a{ color:var(--accent); font-weight:600;}
+.x-note{ font-size:12.5px; color:var(--muted); margin-top:8px;}
+.day-tab.holiday-tab{ border-color:var(--warn);}
+.day-note{ font-size:13px; background:var(--warn-bg); border-radius:10px; padding:8px 11px; margin:0 0 10px; display:none;}
+.day-note.show{ display:block;}
+.act .a-note{ display:block; font-size:11.5px; color:var(--warn); font-weight:700; margin-top:2px;}
+@media (max-width:640px){ .xmas-grid{ grid-template-columns:1fr;} .xcols{ grid-template-columns:1fr 1fr;} }
 /* 旅程プランナー */
 .planner{ background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:16px 18px;}
 .day-tabs{ display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; padding-bottom:4px;}
@@ -219,6 +250,7 @@ footer{ margin-top:28px;}
 <a href="#s0" class="accent">予約まとめ</a>
 <a href="#s1">宿</a>
 <a href="#s2">周辺のお店</a>
+<a href="#sx">🎄 クリスマスメモ</a>
 <a href="#s3">旅程プランナー</a>
 <a href="#s4">マップ</a>
 <a href="#s5">掲示板</a>
@@ -313,7 +345,7 @@ footer{ margin-top:28px;}
 <article class="shop" data-cat="market">
 <div class="top"><h3>ShopVille（中央駅構内）</h3><span class="walk">徒歩 約10分</span></div>
 <span class="cat">駅ナカ・スーパー＆ショップ</span>
-<p>中央駅の地下ショッピング街。Migros・Coop などがあり、<span class="sun">日曜・祝日も開く店が多い</span>ので12/25〜27の頼みの綱。</p>
+<p>中央駅の地下ショッピング街。Migros・Coop などがあり、<span class="sun">日曜・祝日も開く</span>ので12/25〜27の頼みの綱。目安：12/24 9〜18時、12/25 9〜18時、12/26 9〜20時。駅地下Coopは年中無休。</p>
 <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=ShopVille+Z%C3%BCrich+Hauptbahnhof" target="_blank" rel="noopener">Googleマップで開く →</a>
 </article>
 <article class="shop" data-cat="market">
@@ -361,11 +393,47 @@ footer{ margin-top:28px;}
 </div>
 </section>
 
+<section aria-labelledby="sx">
+<div class="sec-head"><span class="sec-num">✦</span><h2 id="sx">クリスマス期間メモ — 12/21〜27</h2></div>
+<p class="sec-sub">「その日にできること／できないこと」が一目で分かる日別メモ。買い物とマーケットは23日まで、24日は午前中が勝負、25・26日は博物館と山の日、という組み立てが基本です。</p>
+<div class="xmas-lead"><b>要点：</b> 食料品は <b>12/24午前まで</b>に確保。25〜27日は駅・空港・Coop Pronto等のコンビニ型店舗のみが頼り。25・26日のレストランは<b>事前予約が前提</b>。鉄道は25・26日は祝日（日曜）ダイヤで減便 — 出発前にSBBアプリで確認を。</div>
+<div class="xmas-grid">
+<article class="xday"><div class="xday-head"><h3>12/21（月）到着日</h3><span class="badge normal">通常営業</span></div><div class="xcols"><div class="ok"><h4>○ できる</h4><ul><li>13:40着・通常営業で買い物OK</li><li>国立博物館は特別に月曜開館 10〜17時</li><li>マーケット全部開催中</li><li>Illuminariumも開催</li></ul></div><div class="ng"><h4>× 注意</h4><ul><li>チェックイン15:00〜</li><li>到着日は無理せず近場で</li></ul></div></div></article>
+<article class="xday"><div class="xday-head"><h3>12/22（火）</h3><span class="badge normal">通常営業</span></div><div class="xcols"><div class="ok"><h4>○ できる</h4><ul><li>買い物・マーケット・美術館すべて通常</li><li>マーケット巡りに最適な日</li><li>日帰り（ルツェルン等）も通常ダイヤ</li></ul></div><div class="ng"><h4>× 注意</h4><ul><li>特になし — 自由度が一番高い日</li></ul></div></div></article>
+<article class="xday"><div class="xday-head"><h3>12/23（水）</h3><span class="badge normal">買い物 実質最終日</span></div><div class="xcols"><div class="ok"><h4>○ できる</h4><ul><li>通常営業・お土産の買い納め</li><li>マーケット巡り</li></ul></div><div class="ng"><h4>× 終わる</h4><ul><li>Bellevue Noël（オペラハウス前）最終日</li><li>Singing Christmas Tree（Werdmühleplatz）最終日</li><li>Weihnachtsallee・Dörfliも最終日</li></ul></div></div></article>
+<article class="xday"><div class="xday-head"><h3>12/24（木）イブ</h3><span class="badge eve">早期閉店</span></div><div class="xcols"><div class="ok"><h4>○ できる</h4><ul><li>買い出しは午前中ならOK</li><li>Polarzauber（中央駅）〜16時・Münsterhof 最終日</li><li>Kunsthaus 10〜16時</li><li>国立博物館 10〜14時</li><li>ShopVille 9〜18時</li></ul></div><div class="ng"><h4>× できない</h4><ul><li>一般店は16〜18時で閉店</li><li>Illuminariumは休み</li><li>リンツは16時閉館</li></ul></div></div></article>
+<article class="xday holiday"><div class="xday-head"><h3>12/25（金）クリスマス</h3><span class="badge holiday">祝日・原則休業</span></div><div class="xcols"><div class="ok"><h4>○ 開いてる</h4><ul><li>国立博物館 10〜17時（宿から徒歩すぐ）</li><li>ShopVille 9〜18時・駅地下Coop（年中無休）</li><li>空港の店舗・Coop Pronto等</li><li>山：ピラトゥス／リギ／ティトリス運行</li><li>ルツェルン交通博物館 10〜17時</li></ul></div><div class="ng"><h4>× 休み</h4><ul><li>一般店舗は原則休業</li><li>Kunsthaus・リトベルク休館</li><li>リンツ休館・マーケットなし</li><li>Illuminarium休み</li><li>レストランは要予約</li></ul></div></div></article>
+<article class="xday holiday"><div class="xday-head"><h3>12/26（土）聖ステファノの日</h3><span class="badge holiday">祝日・原則休業</span></div><div class="xcols"><div class="ok"><h4>○ 開いてる</h4><ul><li>Kunsthaus 10〜18時</li><li>リトベルク 10〜17時</li><li>国立博物館 10〜17時</li><li>夜はIlluminarium再開（国立博物館中庭・宿のすぐ近く）</li><li>ShopVille 9〜20時・山も運行</li></ul></div><div class="ng"><h4>× 休み</h4><ul><li>一般店舗は原則休業</li><li>リンツ休館（25・26日）</li><li>鉄道は祝日ダイヤ</li></ul></div></div></article>
+<article class="xday"><div class="xday-head"><h3>12/27（日）帰国日</h3><span class="badge sunday">日曜ルール</span></div><div class="xcols"><div class="ok"><h4>○ できる</h4><ul><li>空港の店舗は毎日 6〜21時 — 最後の買い物は空港で</li><li>ShopVilleは営業</li><li>午前は旧市街さんぽ</li></ul></div><div class="ng"><h4>× 注意</h4><ul><li>一般店舗は日曜休業</li><li>チェックアウト〜11:00</li><li>13時頃に宿を出発 → 15:10発 QR096</li></ul></div></div></article>
+</div>
+<div class="x-tips">
+<div class="x-tip"><b>買い物</b><p>食料・お土産は12/23まで、遅くとも12/24午前中に。25〜27日は中央駅 ShopVille、駅地下 Coop、空港、Coop Pronto だけが頼り。</p></div>
+<div class="x-tip"><b>食事</b><p>12/25・26のレストランは休業かホテル系中心。当日飛び込みは難しいので、フォンデュ等は事前予約を。宿のキッチンで自炊も選択肢。</p></div>
+<div class="x-tip"><b>鉄道・山</b><p>25・26日は祝日（日曜）ダイヤで減便。SBBアプリで都度確認。山のケーブルカーは祝日も運行するのが救い — 天気が良い日を山に回すのがコツ。</p></div>
+<div class="x-tip"><b>行けないマーケット</b><p>ラッパースヴィールは12/20で終了、アインジーデルンは12/6で終了。この旅行期間には間に合いません。</p></div>
+</div>
+<p class="x-note">2026年11月22日時点の公式情報。変更の可能性があるので出発前に再確認を。</p>
+<div class="sources">出典：
+<a href="https://www.zuerich.com/en/inform-plan/useful-information-and-services/opening-hours-and-public-holidays/holidays" target="_blank" rel="noopener">祝日・営業時間（zuerich.com）</a> /
+<a href="https://www.sbb.ch/en/travel-information/stations/find-station/zuerich-hb-station/oeffnungszeiten.html" target="_blank" rel="noopener">ShopVille営業時間（SBB）</a> /
+<a href="https://polarzauber.ch/en/" target="_blank" rel="noopener">Polarzauber</a> /
+<a href="https://illuminarium.ch/" target="_blank" rel="noopener">Illuminarium</a> /
+<a href="https://www.kunsthaus.ch/en/besuch-planen/besucherinfos/" target="_blank" rel="noopener">Kunsthaus</a> /
+<a href="https://www.landesmuseum.ch/en/" target="_blank" rel="noopener">国立博物館</a> /
+<a href="https://pilatus.ch/en/railway-cableways/timetable" target="_blank" rel="noopener">ピラトゥス</a> /
+<a href="https://www.rigi.ch/en/inform/timetables" target="_blank" rel="noopener">リギ</a> /
+<a href="https://www.titlis.ch/en/information/timetable-lifts" target="_blank" rel="noopener">ティトリス</a> /
+<a href="https://www.verkehrshaus.ch/en/your-visit/plan-a-visit/opening-times" target="_blank" rel="noopener">交通博物館</a> /
+<a href="https://www.rheinfall.ch/en/inform/opening-hours-prices/list" target="_blank" rel="noopener">ライン滝</a>
+</div>
+</section>
+
 <section aria-labelledby="s3">
 <div class="sec-head"><span class="sec-num">3</span><h2 id="s3">旅程プランナー</h2></div>
-<p class="sec-sub">12/21〜27の7日間。日付を選んで、やりたいことをタップで追加。並べ替え・削除もできます。初日は13:40着・チェックイン15:00〜、最終日は15:10発（13時頃に宿を出発）が前提です。決まったら「掲示板に共有」で2人に残せます。</p>
+<p class="sec-sub">12/21〜27の7日間。日付を選んで、やりたいことをタップで追加。並べ替え・削除もできます。初日は13:40着・チェックイン15:00〜、最終日は15:10発（13時頃に宿を出発）が前提です。<strong>25・26日は祝日マーク付き</strong> — 上の「クリスマス期間メモ」と合わせて組むと失敗しません。決まったら「掲示板に共有」で2人に残せます。</p>
 <div class="planner">
 <div class="day-tabs" id="day-tabs" role="group" aria-label="日付を選ぶ"></div>
+<p class="day-note" id="day-note"></p>
 <div class="planner-cols">
 <div>
 <h4>やりたいことリスト</h4>
@@ -417,7 +485,7 @@ footer{ margin-top:28px;}
 </section>
 
 <footer>
-宿・航空券は予約確定済みの情報です。お店の営業時間（特に12/25・26の祝日と日曜）は変更される場合があるので、出発前に公式情報で確認を。
+宿・航空券は予約確定済みの情報です。クリスマス期間メモは2026年11月22日時点の公式情報。変更の可能性があるので出発前に再確認を。
 </footer>
 </div>
 <button type="button" class="back-to-top" id="back-to-top" aria-label="トップへ戻る">↑ トップへ</button>
@@ -476,42 +544,51 @@ s.style.display = (f === "all" || s.getAttribute("data-cat") === f) ? "" : "none
 (function () {
 // 旅程プランナー（このページを開いている間のカスタム。共有は掲示板経由）
 var DAYS = [
-{ id: "1221", label: "12/21", dow: "月", hint: "到着日・13:40着"},
-{ id: "1222", label: "12/22", dow: "火", hint: ""},
-{ id: "1223", label: "12/23", dow: "水", hint: ""},
-{ id: "1224", label: "12/24", dow: "木", hint: "クリスマスイブ"},
-{ id: "1225", label: "12/25", dow: "金", hint: "祝日・クリスマス"},
-{ id: "1226", label: "12/26", dow: "土", hint: "祝日"},
-{ id: "1227", label: "12/27", dow: "日", hint: "帰国日・15:10発"}
+{ id: "1221", label: "12/21", dow: "月", hint: "到着日・13:40着", note: "通常営業。国立博物館は特別に月曜も開館（10〜17時）。マーケット全部開催中。"},
+{ id: "1222", label: "12/22", dow: "火", hint: "通常営業", note: "通常営業 — 買い物・マーケット・美術館すべてOK。自由度が一番高い日。"},
+{ id: "1223", label: "12/23", dow: "水", hint: "買い物 実質最終日", note: "通常営業だが買い物の実質最終日。Bellevue NoëlとSinging Christmas Treeはこの日が最終日。"},
+{ id: "1224", label: "12/24", dow: "木", hint: "イブ・早期閉店", note: "お店は16〜18時閉店。買い出しは午前中が安全。Polarzauberは16時までが最終。Illuminariumは休み。"},
+{ id: "1225", label: "12/25", dow: "金", hint: "🎄祝日", holiday: true, note: "🎄 祝日：一般店舗は原則休業。国立博物館（10〜17時）とShopVille（9〜18時）、山はOK。Kunsthaus・リトベルク・リンツは休み。鉄道は祝日ダイヤ。"},
+{ id: "1226", label: "12/26", dow: "土", hint: "🎄祝日", holiday: true, note: "🎄 祝日：店舗は原則休業。Kunsthaus（10〜18時）・リトベルク（10〜17時）・国立博物館は開館。夜はIlluminarium再開。鉄道は祝日ダイヤ。"},
+{ id: "1227", label: "12/27", dow: "日", hint: "帰国日・15:10発", note: "日曜ルールで一般店舗は休業。最後の買い物は空港（6〜21時）で。13時頃に宿を出発。"}
 ];
 var ACTS = [
 { id: "arrive", group: "到着・帰国", name: "到着＆チェックイン", meta: "13:40着・チェックイン15:00〜"},
 { id: "shop-first", group: "到着・帰国", name: "近所で初日の買い物", meta: "月曜は通常営業・Migros Rigiplatzなど"},
-{ id: "depart", group: "到着・帰国", name: "チェックアウト＆空港へ", meta: "アウト〜11:00／13時頃出発・15:10発"},
-{ id: "oldtown", group: "チューリッヒ市内", name: "旧市街さんぽ", meta: "リンデンホフ・大聖堂・半日"},
-{ id: "xmas", group: "チューリッヒ市内", name: "クリスマスマーケット巡り", meta: "中央駅＆旧市街・12月限定"},
+{ id: "depart", group: "到着・帰国", name: "チェックアウト＆空港へ", meta: "アウト〜11:00／13時頃出発・15:10発", note: "最後の買い物は空港で（毎日6〜21時）"},
+{ id: "oldtown", group: "チューリッヒ市内", name: "旧市街さんぽ", meta: "リンデンホフ・大聖堂・半日 — 祝日でも歩ける"},
+{ id: "xmas", group: "チューリッヒ市内", name: "クリスマスマーケット巡り", meta: "中央駅Polarzauber＆旧市街", note: "大半は12/23まで。PolarzauberとMünsterhofのみ12/24（〜16時）まで。25・26日はなし"},
+{ id: "illuminarium", group: "チューリッヒ市内", name: "Illuminarium（光のショー）", meta: "国立博物館の中庭・宿から徒歩すぐ・夜", note: "12/24・25は休み。12/26から再開（〜12/30）"},
 { id: "lake", group: "チューリッヒ市内", name: "チューリッヒ湖クルーズ", meta: "中央駅からトラムですぐ"},
 { id: "uetli", group: "チューリッヒ市内", name: "ウトリベルク展望台", meta: "電車約20分＋山歩き"},
-{ id: "lindt", group: "チューリッヒ市内", name: "リンツ チョコレート博物館", meta: "キルヒベルク・電車＋バス約30分"},
-{ id: "museum", group: "チューリッヒ市内", name: "スイス国立博物館", meta: "宿から約200m・中央駅の真裏"},
+{ id: "lindt", group: "チューリッヒ市内", name: "リンツ チョコレート博物館", meta: "キルヒベルク・電車＋バス約30分・要予約", note: "12/25・26は休館。12/24は16時まで"},
+{ id: "museum", group: "チューリッヒ市内", name: "スイス国立博物館", meta: "宿から約200m・10〜17時", note: "12/21は特別に月曜開館。12/24は10〜14時。12/25・26も開館 — 祝日の本命"},
+{ id: "kunsthaus", group: "チューリッヒ市内", name: "Kunsthaus（美術館）", meta: "Heimplatz・コレクション水曜無料", note: "12/25は休館。12/24は10〜16時、12/26は10〜18時"},
+{ id: "rietberg", group: "チューリッヒ市内", name: "リトベルク美術館", meta: "Enge地区・10〜17時（木曜〜20時）", note: "12/24・25は休館。12/26は開館"},
 { id: "lucerne", group: "日帰り", name: "ルツェルン日帰り", meta: "直通電車 約45〜50分・カペル橋と湖"},
-{ id: "rhine", group: "日帰り", name: "ライン滝日帰り", meta: "電車 約50分・ヨーロッパ最大級の滝"},
-{ id: "bern", group: "日帰り", name: "ベルン日帰り", meta: "直通電車 約1時間・首都の旧市街"},
+{ id: "verkehrshaus", group: "日帰り", name: "ルツェルン交通博物館", meta: "ルツェルン・冬季10〜17時", note: "年中無休 — 祝日（12/25・26）の日帰り先として確実"},
+{ id: "pilatus", group: "日帰り・山", name: "ピラトゥス山", meta: "ルツェルン経由・クリエンス側ゴンドラ", note: "12月は歯車鉄道が運休。ゴンドラのみ、上り最終は16時台と早い"},
+{ id: "rigi", group: "日帰り・山", name: "リギ山", meta: "Arth-Goldau／Vitznauから登山鉄道", note: "祝日は週末ダイヤで運行"},
+{ id: "titlis", group: "日帰り・山", name: "ティトリス山（エンゲルベルク）", meta: "ルツェルン経由 約2時間半・標高3,000m超", note: "年中無休。山頂への最終上り15:30、下り最終17:00"},
+{ id: "rhine", group: "日帰り", name: "ライン滝日帰り", meta: "電車 約50分・ヨーロッパ最大級の滝", note: "見学は年中可能。遊覧船は12/24〜1/3運休。Schloss Laufen側は12月10〜16時"},
+{ id: "bern", group: "日帰り", name: "ベルン日帰り", meta: "直通電車 約1時間・首都の旧市街", note: "12/25・26は祝日で店舗はほぼ休み。散策のみ"},
 { id: "interlaken", group: "日帰り", name: "インターラーケン日帰り", meta: "電車 約2時間・丸一日コース"},
-{ id: "fondue", group: "食べる・夜", name: "チーズフォンデュの夕食", meta: "旧市街のお店で"},
-{ id: "thai", group: "食べる・夜", name: "近所の Zentral Thai で夕食", meta: "徒歩約4分"},
+{ id: "rapperswil", group: "日帰り", name: "ラッパースヴィール", meta: "湖畔の旧市街・電車約40分", note: "⚠ クリスマスマーケットは12/20で終了 — この旅行では行けません"},
+{ id: "einsiedeln", group: "日帰り", name: "アインジーデルン", meta: "修道院の町・電車約50分", note: "⚠ クリスマスマーケットは12/6で終了 — この旅行では行けません"},
+{ id: "fondue", group: "食べる・夜", name: "チーズフォンデュの夕食", meta: "旧市街のお店で", note: "12/25・26は事前予約が前提"},
+{ id: "thai", group: "食べる・夜", name: "近所の Zentral Thai で夕食", meta: "徒歩約4分", note: "祝日は休業の可能性 — 事前確認を"},
 { id: "cafe", group: "食べる・夜", name: "近所カフェで朝食", meta: "Klara's kitchen（同じ建物）など"},
-{ id: "slow", group: "ゆっくり", name: "洗濯＆のんびりデー", meta: "建物の洗濯機でリセット"},
-{ id: "souvenir", group: "ゆっくり", name: "お土産さがし", meta: "バーンホフ通り・Sprüngli周辺"}
+{ id: "slow", group: "ゆっくり", name: "洗濯＆のんびりデー", meta: "建物の洗濯機でリセット — 祝日に向く"},
+{ id: "souvenir", group: "ゆっくり", name: "お土産さがし", meta: "バーンホフ通り・Sprüngli周辺", note: "12/23まで（遅くとも12/24午前）。25〜27日は駅・空港のみ"}
 ];
 var PRESET = {
-"1221": ["arrive", "shop-first"],
-"1222": ["cafe", "lucerne"],
-"1223": ["oldtown", "xmas"],
-"1224": ["rhine", "fondue"],
-"1225": ["museum", "souvenir"],
-"1226": ["slow", "lake"],
-"1227": ["depart"]
+"1221": ["arrive", "shop-first", "xmas"],
+"1222": ["cafe", "lucerne", "verkehrshaus"],
+"1223": ["oldtown", "xmas", "souvenir"],
+"1224": ["museum", "xmas", "fondue"],
+"1225": ["museum", "oldtown"],
+"1226": ["kunsthaus", "rietberg", "illuminarium"],
+"1227": ["oldtown", "depart"]
 };
 var byId = {};
 ACTS.forEach(function (a) { byId[a.id] = a;});
@@ -534,14 +611,20 @@ tabsEl.innerHTML = "";
 DAYS.forEach(function (d) {
 var b = document.createElement("button");
 b.type = "button";
-b.className = "day-tab" + (d.id === current ? " on" : "");
-b.appendChild(document.createTextNode(d.label + "（" + d.dow + "）"));
+b.className = "day-tab" + (d.id === current ? " on" : "") + (d.holiday ? " holiday-tab" : "");
+b.appendChild(document.createTextNode(d.label + "（" + d.dow + "）" + (d.holiday ? " 🎄" : "")));
 var s = document.createElement("small");
-s.textContent = plan[d.id].length ? plan[d.id].length + "件" : (d.hint || "未定");
+s.textContent = (plan[d.id].length ? plan[d.id].length + "件" : (d.hint || "未定")) + (d.holiday ? "・祝日" : "");
 b.appendChild(s);
 b.addEventListener("click", function () { current = d.id; renderAll();});
 tabsEl.appendChild(b);
 });
+var noteEl = document.getElementById("day-note");
+if (noteEl) {
+var cur = DAYS.filter(function (x) { return x.id === current;})[0];
+if (cur && cur.note) { noteEl.textContent = cur.label + "（" + cur.dow + "）：" + cur.note; noteEl.classList.add("show");}
+else { noteEl.textContent = ""; noteEl.classList.remove("show");}
+}
 }
 
 function renderPool() {
@@ -565,6 +648,7 @@ nm.className = "a-name"; nm.textContent = a.name;
 var mt = document.createElement("span");
 mt.className = "a-meta"; mt.textContent = a.meta;
 txt.appendChild(nm); txt.appendChild(mt);
+if (a.note) { var nt = document.createElement("span"); nt.className = "a-note"; nt.textContent = "⚠ " + a.note; txt.appendChild(nt);}
 var plus = document.createElement("span");
 plus.className = "plus"; plus.textContent = added ? "✓" : "＋";
 b.appendChild(txt); b.appendChild(plus);
@@ -593,7 +677,7 @@ var nm = document.createElement("span");
 nm.className = "d-name";
 nm.appendChild(document.createTextNode(a.name));
 var sm = document.createElement("small");
-sm.textContent = a.meta;
+sm.textContent = a.meta + (a.note ? " ／ " + a.note : "");
 nm.appendChild(sm);
 li.appendChild(nm);
 var up = document.createElement("button");
@@ -623,7 +707,7 @@ DAYS.forEach(function (d) {
 var box = document.createElement("div");
 box.className = "ov-day";
 var b = document.createElement("b");
-b.textContent = dayLabel(d);
+b.textContent = dayLabel(d) + (d.holiday ? " 🎄祝日" : "");
 box.appendChild(b);
 if (!plan[d.id].length) {
 var n = document.createElement("span");
