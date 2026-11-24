@@ -181,6 +181,30 @@ background:var(--accent); color:var(--accent-ink); border:none;}
 .ov-day b{ display:block; font-size:13.5px; color:var(--accent); margin-bottom:2px;}
 .ov-day ul{ margin:0; padding-left:1.1em;}
 .ov-day .none{ color:var(--muted);}
+/* 準備チェックリスト */
+.prep{ background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:16px 18px;}
+.prep-top{ display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; margin-bottom:6px;}
+.prep-count{ font-size:20px; font-weight:800; color:var(--accent); font-variant-numeric:tabular-nums;}
+.prep-count small{ font-size:13px; font-weight:600; color:var(--muted);}
+.prep-bar{ flex:1 1 180px; height:10px; border-radius:999px; background:var(--surface2); overflow:hidden;}
+.prep-bar i{ display:block; height:100%; background:var(--accent); border-radius:999px; transition:width .25s ease;}
+.prep-groups{ display:grid; grid-template-columns:1fr 1fr; gap:14px 18px; margin-top:10px;}
+.prep-group h4{ font-size:14px; margin:0 0 8px; display:flex; align-items:center; gap:8px;}
+.prep-group h4 .tag{ font-size:11.5px; font-weight:800; padding:2px 9px; border-radius:999px; background:var(--surface2); color:var(--muted);}
+.prep-group h4 .tag.urgent{ background:#fde8e0; color:#8a3b12;}
+.prep-group h4 .tag.done-tag{ background:#e6f2ec; color:var(--accent);}
+.prep-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px;}
+.prep-item{ display:flex; align-items:flex-start; gap:10px; width:100%; text-align:left; font:inherit; font-size:14.5px;
+background:var(--surface2); border:1px solid var(--line); border-radius:10px; padding:9px 12px; cursor:pointer; color:var(--ink);}
+.prep-item .box{ flex:none; width:22px; height:22px; margin-top:1px; border-radius:6px; border:2px solid var(--muted);
+display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:800; color:transparent; background:var(--surface);}
+.prep-item.checked .box{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink);}
+.prep-item .p-name{ font-weight:700; display:block;}
+.prep-item .p-note{ display:block; font-size:12.5px; color:var(--muted); font-weight:400; margin-top:1px;}
+.prep-item.checked .p-name{ color:var(--muted); text-decoration:line-through;}
+.prep-actions{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; border-top:1px solid var(--line); padding-top:14px;}
+.prep-msg{ font-size:13.5px; color:var(--accent); margin:8px 0 0; min-height:1.4em;}
+@media (max-width:640px){ .prep{ padding:12px 14px;} .prep-groups{ grid-template-columns:1fr;} }
 /* 地図 */
 #map{ height:420px; border-radius:12px; border:1px solid var(--line); box-shadow:var(--shadow); z-index:0;}
 .map-note{ font-size:13px; color:var(--muted); margin-top:8px;}
@@ -252,6 +276,7 @@ footer{ margin-top:28px;}
 <a href="#s2">周辺のお店</a>
 <a href="#sx">🎄 クリスマスメモ</a>
 <a href="#s3">旅程プランナー</a>
+<a href="#sp">準備チェックリスト</a>
 <a href="#s4">マップ</a>
 <a href="#s5">掲示板</a>
 </nav>
@@ -453,6 +478,23 @@ footer{ margin-top:28px;}
 <button type="button" class="p-btn ghost" id="btn-clear">全部クリア</button>
 </div>
 <p class="planner-msg" id="planner-msg" role="status"></p>
+</div>
+</section>
+
+<section aria-labelledby="sp">
+<div class="sec-head"><span class="sec-num">準</span><h2 id="sp">旅行準備チェックリスト</h2></div>
+<p class="sec-sub">出発（12/21）まで約4週間。タップでチェックできます。進み具合は「掲示板に共有」で2人に残せます（チェック自体はこのページを開いている間だけ保持）。一番急ぐのは12/25・26の夕食の予約です。</p>
+<div class="prep">
+<div class="prep-top">
+<span class="prep-count" id="prep-count">0 / 0 <small>完了</small></span>
+<div class="prep-bar" aria-hidden="true"><i id="prep-bar-fill" style="width:0%"></i></div>
+</div>
+<div class="prep-groups" id="prep-groups"></div>
+<div class="prep-actions">
+<button type="button" class="p-btn" id="btn-prep-share">進み具合を掲示板に共有</button>
+<button type="button" class="p-btn ghost" id="btn-prep-reset">チェックを初期状態に戻す</button>
+</div>
+<p class="prep-msg" id="prep-msg" role="status"></p>
 </div>
 </section>
 
@@ -789,6 +831,148 @@ btn.disabled = false; btn.textContent = "掲示板に共有";
 });
 
 renderAll();
+})();
+</script>
+
+<script>
+(function () {
+// 旅行準備チェックリスト（チェックはこのページを開いている間のみ保持。共有は掲示板経由）
+var GROUPS = [
+{ id: "done", title: "済み", tag: "予約・手配完了", tagClass: "done-tag", items: [
+{ id: "flight", name: "航空券を予約", note: "カタール航空往復（HIS手配）・カード1で支払い済み", checked: true },
+{ id: "hotel", name: "宿を予約", note: "Vineyard 71、12/21〜27・6泊（Airbnb）・支払い済み", checked: true }
+]},
+{ id: "decide", title: "いま決めること", tag: "最優先", tagClass: "urgent", items: [
+{ id: "dinner25", name: "12/25（金）クリスマスの夕食を決めて予約", note: "候補を比較中：eCHo（CHF 89）／ La Rôtisserie（CHF 240）／ Raclette Factory（ラクレット食べ放題 CHF 39.90）。人気店は埋まるので早めに" },
+{ id: "dinner25tel", name: "Raclette Factory のクリスマス営業を電話で確認", note: "2026年の12/25営業は未確認（2025年は営業）。+41 44 261 04 10" },
+{ id: "dinner26", name: "12/26（土）の夕食を決めて予約", note: "25日ほど調べが進んでいない日。祝日で開く店は限られるので予約前提で" }
+]},
+{ id: "arrange", title: "これから手配すること", tag: "出発までに", tagClass: "", items: [
+{ id: "railpass", name: "鉄道パスを買う", note: "日帰りが多いので Swiss Travel Pass 系が候補。日程が固まったら購入" },
+{ id: "daytrip", name: "日帰り旅程を確定する", note: "上の旅程プランナーの候補から。25・26日は祝日ダイヤに注意" },
+{ id: "insurance", name: "海外旅行保険に加入する", note: "" },
+{ id: "esim", name: "通信を用意する（eSIMなど）", note: "2人分。現地で地図とSBBアプリが使えるように" },
+{ id: "money", name: "お金の準備", note: "CHFの現金を少し＋カードが海外で使えるか確認" },
+{ id: "plug", name: "電源プラグ（スイスJタイプ）を用意", note: "日本ともEUとも違う形。変換プラグが必要" }
+]},
+{ id: "last", title: "出発直前", tag: "12/20〜21", tagClass: "", items: [
+{ id: "checkin", name: "チェックインして羽田へ", note: "12/20 22:25から羽田空港 第3ターミナルでチェックイン（00:25発 QR813）" },
+{ id: "packing", name: "防寒の荷造り", note: "12月下旬のチューリッヒは氷点下になることも。手袋・帽子・厚手の上着を" },
+{ id: "passport", name: "パスポートと予約控えを確認", note: "航空券・宿の予約情報もすぐ出せるように" }
+]}
+];
+var state = {};
+GROUPS.forEach(function (g) { g.items.forEach(function (it) { state[it.id] = !!it.checked; }); });
+
+var groupsEl = document.getElementById("prep-groups");
+var countEl = document.getElementById("prep-count");
+var barEl = document.getElementById("prep-bar-fill");
+var msgEl = document.getElementById("prep-msg");
+if (!groupsEl) return;
+
+function total() {
+var t = 0, c = 0;
+GROUPS.forEach(function (g) { g.items.forEach(function (it) { t++; if (state[it.id]) c++; }); });
+return { t: t, c: c };
+}
+
+function render() {
+groupsEl.innerHTML = "";
+GROUPS.forEach(function (g) {
+var wrap = document.createElement("div");
+wrap.className = "prep-group";
+var h = document.createElement("h4");
+h.appendChild(document.createTextNode(g.title));
+var tag = document.createElement("span");
+tag.className = "tag" + (g.tagClass ? " " + g.tagClass : "");
+tag.textContent = g.tag;
+h.appendChild(tag);
+wrap.appendChild(h);
+var ul = document.createElement("ul");
+ul.className = "prep-list";
+g.items.forEach(function (it) {
+var li = document.createElement("li");
+var b = document.createElement("button");
+b.type = "button";
+b.className = "prep-item" + (state[it.id] ? " checked" : "");
+b.setAttribute("aria-pressed", state[it.id] ? "true" : "false");
+var box = document.createElement("span");
+box.className = "box"; box.textContent = "✓"; box.setAttribute("aria-hidden", "true");
+var txt = document.createElement("span");
+var nm = document.createElement("span");
+nm.className = "p-name"; nm.textContent = it.name;
+txt.appendChild(nm);
+if (it.note) {
+var nt = document.createElement("span");
+nt.className = "p-note"; nt.textContent = it.note;
+txt.appendChild(nt);
+}
+b.appendChild(box); b.appendChild(txt);
+b.addEventListener("click", function () {
+state[it.id] = !state[it.id];
+msgEl.textContent = "";
+render();
+});
+li.appendChild(b);
+ul.appendChild(li);
+});
+wrap.appendChild(ul);
+groupsEl.appendChild(wrap);
+});
+var s = total();
+countEl.innerHTML = "";
+countEl.appendChild(document.createTextNode(s.c + " / " + s.t + " "));
+var sm = document.createElement("small");
+sm.textContent = "完了";
+countEl.appendChild(sm);
+barEl.style.width = (s.t ? Math.round(s.c / s.t * 100) : 0) + "%";
+}
+
+function prepText() {
+var s = total();
+var lines = ["【旅行準備チェックリスト】" + s.c + " / " + s.t + " 完了"];
+GROUPS.forEach(function (g) {
+lines.push("■ " + g.title);
+g.items.forEach(function (it) {
+lines.push((state[it.id] ? "☑ " : "☐ ") + it.name);
+});
+});
+return lines.join("\n");
+}
+
+document.getElementById("btn-prep-reset").addEventListener("click", function () {
+GROUPS.forEach(function (g) { g.items.forEach(function (it) { state[it.id] = !!it.checked; }); });
+msgEl.textContent = "チェックを初期状態（予約済みの2件のみ完了）に戻しました。";
+render();
+});
+document.getElementById("btn-prep-share").addEventListener("click", function () {
+var btn = this;
+var nameEl2 = document.getElementById("msg-name");
+var name = (nameEl2 && nameEl2.value.trim()) || "準備チェックリスト";
+btn.disabled = true; btn.textContent = "共有中…";
+fetch("https://buakxvvxvdhdxlbclztq.supabase.co/rest/v1/messages", {
+method: "POST",
+headers: {
+"apikey": "sb_publishable_aGkX73CLmK1Y1LEk9o70Pg_4dVq3SLi",
+"Authorization": "Bearer sb_publishable_aGkX73CLmK1Y1LEk9o70Pg_4dVq3SLi",
+"Content-Type": "application/json",
+"Prefer": "return=minimal"
+},
+body: JSON.stringify({ name: name, body: prepText() })
+}).then(function (res) {
+if (!res.ok) throw new Error("HTTP " + res.status);
+msgEl.textContent = "掲示板に共有しました。下の掲示板に表示されます。";
+if (window.__reloadBoard) window.__reloadBoard();
+var board = document.getElementById("s5");
+if (board) board.scrollIntoView({ behavior: "smooth" });
+}).catch(function () {
+msgEl.textContent = "共有できませんでした。通信状態を確認してもう一度どうぞ。";
+}).then(function () {
+btn.disabled = false; btn.textContent = "進み具合を掲示板に共有";
+});
+});
+
+render();
 })();
 </script>
 
